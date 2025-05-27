@@ -1,6 +1,6 @@
 import requests
 
-access_token = 'O6ifn1uNd1vnt/3q23gGtFjpwUI/FC2yOY4ypGOGCfzlQoOIORMB/YUHWa44wX/BVaqsYAjJBtn5s92hQ5CXOUmojuCpEcA14NQ1ppjFhGL6mInfx/sOfMQZHqpV7uhrZ7nYkiRDWLtgWtUPaBy7+AdB04t89/1O/w1cDnyilFU='
+access_token = ''
 headers = {
     "Authorization": f"Bearer {access_token}",
     "Content-Type": "application/json"
