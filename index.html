@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>จองคิวผ่าน LINE</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h1>Welcome to Queue Booking</h1>
+  <button onclick="reserve()">จองคิวเลย</button>
 
+  <script>
+    async function reserve() {
+      await liff.init({ liffId: "2007488227-p7AbeoVY" });
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        const profile = await liff.getProfile();
+        const userId = profile.userId;
+
+        // ส่ง userId ไปยัง Backend
+        fetch("https://your-server.com/webhook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId })
+        });
+
+        alert(`ยืนยันการจองของคุณแล้ว\nUserId: ${userId}`);
+      }
+    }
+  </script>
+</body>
+</html>
