@@ -6,6 +6,10 @@ import datetime
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def index():
+    return "🚀 Backend is live!"
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.json
