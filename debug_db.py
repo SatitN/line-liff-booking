@@ -1,12 +1,19 @@
+# debug_db.py
+
 import sqlite3
 
-conn = sqlite3.connect('database.db')
-c = conn.cursor()
+def show_bookings():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
 
-c.execute("SELECT * FROM bookings")
-rows = c.fetchall()
+    cursor.execute("SELECT * FROM bookings")
+    rows = cursor.fetchall()
 
-for row in rows:
-    print(row)
+    print("=== Bookings Table ===")
+    for row in rows:
+        print(row)
 
-conn.close()
+    conn.close()
+
+if __name__ == "__main__":
+    show_bookings()
