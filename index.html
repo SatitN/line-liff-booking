@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Queue Booking</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h2>ระบบจองคิว</h2>
+
+  <form id="bookingForm">
+    <label>ชื่อ-นามสกุล:</label><br>
+    <input type="text" id="name" required><br><br>
+
+    <label>วันที่จอง:</label><br>
+    <input type="date" id="date" required><br><br>
+
+    <label>เวลาที่ต้องการ:</label><br>
+    <input type="time" id="time" required><br><br>
+
+    <button type="submit">ยืนยันการจอง</button>
+  </form>
+
+  <script>
+    let userId = "";
+
+    async function initLiff() {
+      await liff.init({ liffId: "2007488227-p7AbeoVY" });
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        const profile = await liff.getProfile();
+        userId = profile.userId;
+      }
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+
+      const payload = {
+        userId: userId,
+        name: name,
+        date: date,
+        time: time
+      };
+
+      fetch("https://your-api-endpoint.com/webhook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("ส่งข้อมูลจองเรียบร้อยแล้ว");
+    });
+
+    initLiff();
+  </script>
+</body>
+</html>
