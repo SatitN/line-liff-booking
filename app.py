@@ -8,6 +8,7 @@ CORS(app)
 
 @app.route('/')
 def index():
+    
     return "🚀 Backend is live!"
 
 @app.route('/webhook', methods=['POST'])
@@ -28,6 +29,16 @@ def webhook():
     conn.close()
 
     return jsonify({"status": "success"}), 200
+
+@app.route("/bookings", methods=["GET"])
+def get_bookings():
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM bookings")
+    rows = cursor.fetchall()
+    conn.close()
+
+    return jsonify(rows)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
